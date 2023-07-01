@@ -1,1 +1,1 @@
-# psy-games
+# Discovery Game App
