@@ -1,18 +1,25 @@
 import { HStack, Icon } from "@chakra-ui/react";
 import { Platform } from "../hooks/useGames";
-import {FaWindows,FaPlaystation,FaXbox,FaApple,FaLinux,FaAndroid} from 'react-icons/fa'
-import {MdPhoneIphone} from 'react-icons/md'
-import {SiNintendo} from 'react-icons/si'
-import {BsGlobe} from 'react-icons/bs'
+import {
+  FaWindows,
+  FaPlaystation,
+  FaXbox,
+  FaApple,
+  FaLinux,
+  FaAndroid,
+} from "react-icons/fa";
+import { MdPhoneIphone } from "react-icons/md";
+import { SiNintendo } from "react-icons/si";
+import { BsGlobe } from "react-icons/bs";
 import { IconType } from "react-icons";
- 
+
 interface Props {
   platforms: Platform[];
 }
 
 const PlatformIcon = ({ platforms }: Props) => {
   //index signature syntax so we dont explicitly infer each key/property name a type
-  const iconMap: {[key: string]: IconType} = {
+  const iconMap: { [key: string]: IconType } = {
     pc: FaWindows,
     playstation: FaPlaystation,
     xbox: FaXbox,
@@ -21,17 +28,17 @@ const PlatformIcon = ({ platforms }: Props) => {
     linux: FaLinux,
     ios: MdPhoneIphone,
     android: FaAndroid,
-    web: BsGlobe
-  }
+    web: BsGlobe,
+  };
 
   return (
     //render compoents horizontally
     <HStack marginY={1}>
-      {platforms.map((platform ) => (
-        <Icon as={iconMap[platform.slug]} color="gray.500"/> 
+      {platforms.map((platform) => (
+        <Icon as={iconMap[platform.slug]} color="gray.500" />
       ))}
     </HStack>
   );
 };
- 
+
 export default PlatformIcon;
