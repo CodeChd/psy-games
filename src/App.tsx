@@ -14,11 +14,13 @@ function App() {
       <GridItem area="nav">
         <Navbar/>
       </GridItem>
+
       <Show above="lg">
         <GridItem area="aside" >
          <GenreList/>
         </GridItem>
       </Show>
+      
       <GridItem area="main" >
         <GameGrid/>
       </GridItem>

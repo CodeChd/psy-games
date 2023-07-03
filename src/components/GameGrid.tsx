@@ -6,7 +6,7 @@ import GameCardContainer from "./GameCardContainer";
 
 const GameGrid = () => {
   //this is more modular so this component is responsible for returning our markup/ui
-  const { games, error, isLoading } = useGames();
+  const { data, error, isLoading } = useGames();
 
   const skeletons = [1, 2, 3, 4, 5];
 
@@ -28,12 +28,12 @@ const GameGrid = () => {
           ))}
 
         {/* display fetched games */}
-        {games.map((game) => (
+        {data.map((game) => (
           <GameCardContainer>
             <GameCard key={game.id} game={game} />
           </GameCardContainer>
         ))}
-        
+
       </SimpleGrid>
     </>
   );
