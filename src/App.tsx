@@ -1,21 +1,22 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
-import {Platform } from "./hooks/useGames";
+import { Platform } from "./hooks/useGames";
+import SortSelector from "./components/SortSelector";
 
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
+  sortOrder: string
 }
 
 function App() {
   //used an object for fetch req as to not have cluttered state variables and easy to understand
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-
 
   return (
     <Grid
@@ -36,20 +37,22 @@ function App() {
         <GridItem area="aside" paddingX={5}>
           <GenreList
             selectedGenre={gameQuery.genre}
-            onSelectGenre={(genre) => setGameQuery({...gameQuery, genre})}
+            onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
           />
         </GridItem>
       </Show>
 
       <GridItem area="main">
-        <PlatformSelector
-         selectedPlatform={gameQuery.platform}
-          onSelectPlatform={(platform) => setGameQuery({...gameQuery, platform})}
-        />
-        <GameGrid
-          gameQuery={gameQuery}
-        />
-        
+        <HStack spacing={5} paddingLeft={2} marginBottom={4}>
+          <PlatformSelector
+            selectedPlatform={gameQuery.platform}
+            onSelectPlatform={(platform) =>
+              setGameQuery({ ...gameQuery, platform })
+            }
+          />
+          <SortSelector sortOrder={gameQuery.sortOrder} onSelectSortOrder={(sortOrder) => setGameQuery({...gameQuery, sortOrder})}/>
+        </HStack>
+        <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
   );
