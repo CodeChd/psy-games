@@ -15,8 +15,11 @@ export interface GameQuery {
 }
 
 function App() {
-  //used an object for fetch req as to not have cluttered state variables and easy to understand
+  //encapsulate data inside object for fetch req as to not have cluttered state variables and easy to understand
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+
+  console.log(gameQuery)
+
 
   return (
     <Grid

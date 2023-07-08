@@ -13,6 +13,7 @@ const GameGrid = ({ gameQuery }: Props) => {
   //this is more modular so this component is responsible for returning our markup/ui
   const { data, error, isLoading } = useGames(gameQuery);
 
+
   const skeletons = [1, 2, 3, 4, 5];
 
   return (
