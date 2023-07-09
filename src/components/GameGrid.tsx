@@ -1,5 +1,6 @@
-import {SimpleGrid, Text } from "@chakra-ui/react";
-import useGames, { Platform } from "../hooks/useGames";
+import { SimpleGrid, Text } from "@chakra-ui/react";
+// import useGames, { Platform } from "../hooks/useGames";
+import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
@@ -12,37 +13,33 @@ interface Props {
 const GameGrid = ({ gameQuery }: Props) => {
   //this is more modular so this component is responsible for returning our markup/ui
   const { data, error, isLoading } = useGames(gameQuery);
+  const skeletons = [1, 2, 3, 4];
 
-
-  const skeletons = [1, 2, 3, 4,];
+  if (error) return <Text>Oops.. There's Something Wrong</Text>;
 
   return (
-    <>
-      {error && <Text>Oops.. There's Something Wrong</Text>}
+    <SimpleGrid
+      columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+      padding={3}
+      spacing={6}
+    >
+      {/* loading state */}
+      {isLoading &&
+        skeletons.map((skeleton) => (
+          <GameCardContainer key={skeleton}>
+            <GameCardSkeleton />
+          </GameCardContainer>
+        ))}
 
-      <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-        padding={3}
-        spacing={6}
-      >
-        {/* loading state */}
-        {isLoading &&
-          skeletons.map((skeleton) => (
-            <GameCardContainer key={skeleton}>
-              <GameCardSkeleton />
-            </GameCardContainer>
-          ))}
+      {/* display fetched games */}
 
-        {/* display fetched games */}
-
-        {!isLoading &&
-          data.map((game) => (
-            <GameCardContainer key={game.id}>
-              <GameCard game={game} />
-            </GameCardContainer>
-          ))}
-      </SimpleGrid>
-    </>
+      {!isLoading &&
+        data.map((game) => (
+          <GameCardContainer key={game.id}>
+            <GameCard game={game} />
+          </GameCardContainer>
+        ))}
+    </SimpleGrid>
   );
 };
 
